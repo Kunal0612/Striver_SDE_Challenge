@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+
+int lengthOfLongestConsecutiveSequence(vector<int> &nums, int n) {
+    unordered_set<int> st;
+    for(auto &x:nums){
+        st.insert(x);
+    }
+    int ans=1;
+    while(!st.empty()){
+        int t=*st.begin();
+        st.erase(*st.begin());
+        int cnt=1;
+        int res=t-1;
+        while(!st.empty() and st.count(res)){
+            st.erase(res);
+            res--;
+            cnt++;
+        }
+        res=t+1;
+        while(!st.empty() and st.count(res)){
+            st.erase(res);
+            res++;
+            cnt++;
+        }
+        ans=max(ans,cnt);
+    }
+    return ans;
+}
