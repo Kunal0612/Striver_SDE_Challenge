@@ -1,0 +1,25 @@
+#include <bits/stdc++.h> 
+int jobScheduling(vector<vector<int>> &jobs)
+{
+    int n=jobs.size();
+    vector<pair<int,int>> vp;
+    int m=-1;
+    for(int i=0;i<n;i++){
+        vp.push_back({jobs[i][1],jobs[i][0]});
+        m=max(m,jobs[i][0]);
+    }
+    sort(vp.begin(),vp.end(),greater<pair<int,int>> ());
+    vector<int> vis(m+1,0);
+    int ans=0;
+    for(int i=0;i<n;i++){
+        for(int j=vp[i].second;j>=1;j--){
+            if(!vis[j]){
+                ans+=vp[i].first;
+                //cout<<ans<<endl;
+                vis[j]=1;
+                break;
+            }
+        }
+    }
+    return ans;
+}
