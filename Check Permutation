@@ -1,0 +1,15 @@
+#include <bits/stdc++.h> 
+bool areAnagram(string &str1, string &str2){
+    unordered_map<int,int> mp;
+    if(str1.size()!=str2.size()) return false;
+    for(auto &x:str1){
+        mp[x]--;
+    }
+    for(auto &x:str2){
+        mp[x]++;
+    }
+    for(auto &x:mp){
+        if(x.second>0) return false;
+    }
+    return true;
+}
