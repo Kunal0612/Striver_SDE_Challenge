@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+
+
+bool dfs(int s,vector<int> &vis,int parent,unordered_map<int,vector<int>> &adj){
+        vis[s]++;
+        bool f = false;
+        for(auto it : adj[s]){
+            if(vis[it]&&it==parent) continue;
+            if(vis[it]) return true;
+            f|= dfs(it,vis,s,adj);
+        }
+        return f;
+    }
+
+string cycleDetection (vector<vector<int>>& edges, int n, int m)
+{
+    // Write your code here.
+    unordered_map<int,vector<int>> adj;
+    for(auto it : edges)
+    {
+        adj[it[0]].push_back(it[1]);
+        adj[it[1]].push_back(it[0]);
+    }
+    bool f = 0;
+    vector<int> vis(n+1,0);
+    //for(int i=0;i<=n;i++) vis[i]=0;
+    for(int i = 1;i<=n;++i)
+    {
+        if(vis[i]) continue;
+        if(dfs(i,vis,0,adj)==1)
+        {
+            f = 1;
+            break;
+        }
+    }
+    if(f) return "Yes";
+    return "No";
+}
