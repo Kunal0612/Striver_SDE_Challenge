@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+string longestCommonPrefix(vector<string> &strs, int n)
+{
+        int m=INT_MAX;
+        for(auto &x:strs){
+            int r=x.size();
+            m=min(m,r);
+        }
+        sort(strs.begin(),strs.end());
+        int cnt=0;
+        for(int j=0;j<m;j++){
+            char ch=strs[0][j];
+            int f=1;
+            for(int i=0;i<n;i++){
+                if(ch!=strs[i][j]) f=0;
+            }
+            if(f) cnt++;
+            else break;
+        }
+        return strs[0].substr(0,cnt);
+}
+
+
