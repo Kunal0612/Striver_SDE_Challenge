@@ -1,0 +1,15 @@
+#include <bits/stdc++.h> 
+int uniqueSubstrings(string s)
+{
+    vector<int> mp(256,-1);
+    int l=0,r=0,maxi=0;
+    while(r<s.size()){
+        if(mp[s[r]]!=-1){
+            l=max(l,mp[s[r]]+1);
+        }
+        mp[s[r]]=r;
+        maxi=max(maxi,r-l+1);
+        r++;
+    }
+    return maxi;
+}
