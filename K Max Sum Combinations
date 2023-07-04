@@ -1,0 +1,28 @@
+#include <bits/stdc++.h> 
+vector<int> kMaxSumCombination(vector<int> &nums1, vector<int> &nums2, int n, int k){
+	priority_queue <int, vector<int>, greater<int>> pq;
+	sort(nums1.begin(),nums1.end(),greater<int> ());
+	sort(nums2.begin(),nums2.end(),greater<int> ());
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                int sum=nums1[i]+nums2[j];
+                if(pq.size()<k)pq.push(sum);
+                else if(sum>pq.top())
+                {
+                    pq.pop();
+                    pq.push(sum);
+                }
+                else break;
+            }
+        }
+        vector<int> ans;
+        while(!pq.empty())
+        {
+            ans.push_back(pq.top());
+            pq.pop();
+        }
+		reverse(ans.begin(),ans.end());
+        return ans;
+}
