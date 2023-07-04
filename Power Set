@@ -1,0 +1,18 @@
+#include <bits/stdc++.h> 
+vector<vector<int>> ans;
+void f(int i,vector<int> v,vector<int> v1){
+    if(i==v1.size()){
+        ans.push_back(v);
+        return;
+    }
+    v.push_back(v1[i]);
+    f(i+1,v,v1);
+    v.pop_back();
+    f(i+1,v,v1);
+}
+vector<vector<int>> pwset(vector<int>v)
+{
+    vector<int> vv;
+    f(0,vv,v);
+    return ans;
+}
