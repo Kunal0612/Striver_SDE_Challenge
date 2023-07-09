@@ -1,0 +1,52 @@
+#include <bits/stdc++.h> 
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    template <typename T>
+    class TreeNode {
+       public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this->data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+************************************************************/
+
+vector<int> pv,qv;
+    void dfs(TreeNode<int> * root, int p, int q,vector<int> &v){
+        if(root==NULL){
+            return;
+        }
+        v.push_back(root->data);
+        if(root->data==p) pv=v;
+        if(root->data==q) qv=v;
+        dfs(root->left,p,q,v);
+        v.pop_back();
+        v.push_back(root->data);
+        dfs(root->right,p,q,v);
+        v.pop_back();
+    }
+int lowestCommonAncestor(TreeNode<int> *root, int p, int q)
+{
+	vector<int> v;
+        dfs(root,p,q,v);
+        // for(auto x:pv) cout<<x<<" ";
+        // cout<<endl;
+        // for(auto x:qv) cout<<x<<" ";
+        // cout<<endl;
+        int ans=0;
+        for(int i=0;i<min(pv.size(),qv.size());i++){
+            if(pv[i]==qv[i]){
+                ans=pv[i];
+            }
+            else break;
+        }
+        return ans;
+}
