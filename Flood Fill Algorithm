@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+vector<vector<int>> floodFill(vector<vector<int>> &image, int sr, int sc, int color)
+{
+    // Write your code here.
+    vector<vector<int>> res=image;
+        vector<vector<int>> dir={{0,1},{1,0},{-1,0},{0,-1}};
+        queue<pair<int,int>> q;
+        vector<vector<int>> vis(image.size(),vector<int> (image[0].size(),0));
+        q.push({sr,sc});
+        vis[sr][sc]=1;
+        int clr=image[sr][sc];
+        res[sr][sc]=color;
+        while(!q.empty()){
+            int sz=q.size();
+            for(int i=0;i<sz;i++){
+                auto r=q.front();
+                q.pop();
+                for(auto &it:dir){
+                    int x=r.first+it[0];
+                    int y=r.second+it[1];
+                    if((x>=0 and x<image.size()) and (y>=0 and y<image[0].size()) and vis[x][y]==0 and image[x][y]==clr){
+                        res[x][y]=color;
+                        q.push({x,y});
+                        vis[x][y]=1;
+                    }
+                }
+            }
+        }
+        return res;
+}
