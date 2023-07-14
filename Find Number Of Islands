@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+int vis[1005][1005];
+    void DFS(int i,int j,int** grid,int &cnt,int n,int m){
+        if(i<0 || i>=n || j < 0 || j>=m || grid[i][j]==0) return;
+        if(vis[i][j]==1) return;
+        else{
+            vis[i][j] = 1;
+            cnt++;
+            DFS(i+1,j,grid,cnt,n,m);
+            DFS(i-1,j,grid,cnt,n,m);
+            DFS(i,j+1,grid,cnt,n,m);
+            DFS(i,j-1,grid,cnt,n,m);
+            DFS(i+1,j+1,grid,cnt,n,m);
+            DFS(i-1,j-1,grid,cnt,n,m);
+            DFS(i-1,j+1,grid,cnt,n,m);
+            DFS(i+1,j-1,grid,cnt,n,m);
+        }
+    }
+int getTotalIslands(int** grid, int n, int m)
+{
+   int ans=0;
+   // for(int i=0;i<n;i++){
+   //    for()
+   // }
+   for(int i=0;i<n;i++){
+      for(int j=0;j<m;j++){
+         int cnt=0;
+         DFS(i,j,grid,cnt,n,m);
+         if(cnt) ans++;
+      }
+   }
+   return ans;
+}
