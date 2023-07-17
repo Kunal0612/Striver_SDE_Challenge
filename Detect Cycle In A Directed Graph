@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+int detectCycleInDirectedGraph(int n, vector < pair < int, int >> & edges) {
+  unordered_map<int,vector<int>> mp;
+  vector<int> ind(n+1,0);
+  for(auto x:edges){
+    mp[x.second].push_back(x.first);
+    ind[x.first]++;
+  }
+  queue<int> q;
+  for(int i=1;i<=n;i++){
+    if(ind[i]==0) q.push(i);
+  }
+  vector<int> ans;
+  while(!q.empty()){
+      int r=q.front();
+      q.pop();
+      ans.push_back(r);
+      for(auto x:mp[r]){
+        ind[x]--;
+        if(ind[x]==0){
+          q.push(x);
+        }
+      }
+  }
+  if(ans.size()==n) return 0;
+  return 1;
+}
