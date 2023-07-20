@@ -1,0 +1,41 @@
+Node *firstNode(Node *head)
+
+{
+
+// Write your code here.
+
+Node* slow = head;
+
+Node* fast = head;
+
+while(true){
+
+if(fast == NULL || fast->next == NULL) return NULL;
+
+ 
+
+slow = slow->next;
+
+fast =fast->next->next;
+
+ 
+
+if(slow == fast) break;
+
+}
+
+ 
+
+Node* ans = head;
+
+while(true){
+
+if(slow == ans) return ans;
+
+slow = slow->next;
+
+ans = ans->next;
+
+}
+
+}
